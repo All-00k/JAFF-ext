@@ -1,35 +1,31 @@
-function fillforms(){
+function fillforms(userData){
 
-    //finding all inputs in the form 
-
+    // finding all inputs in the form
     const inputs = document.querySelectorAll("input, textarea");
 
-  
-
-    //looping thorugh every inputs to know there input type
+    // looping through inputs
     inputs.forEach((input) => {
-    
+
         const field = (
-            input.name  +
-            input.id +
-            input.placeholder 
+            (input.name || "") +
+            (input.id || "") +
+            (input.placeholder || "")
         ).toLowerCase();
 
-        //already filled then return 
+        // already filled then skip
         if (input.value) return;
 
-
-      // FIRST NAME
+        // FIRST NAME
         if (field.includes("first") && field.includes("name") && userData.firstName) {
             input.value = userData.firstName;
         }
 
-     // LAST NAME
+        // LAST NAME
         else if (field.includes("last") && field.includes("name") && userData.lastName) {
             input.value = userData.lastName;
         }
 
-      // FULL NAME
+        // FULL NAME
         else if (
             (field.includes("fullname") || field.includes("full_name") || field.includes("name")) 
             && userData.fullName
@@ -47,17 +43,17 @@ function fillforms(){
             input.value = userData.phone;
         }
 
-         // ROLL NUMBER
+        // ROLL NUMBER
         else if (field.includes("roll") && userData.rollNumber) {
             input.value = userData.rollNumber;
         }
 
-         // ERP
+        // ERP
         else if (field.includes("erp") && userData.erp) {
             input.value = userData.erp;
         }
 
-         // SECTION
+        // SECTION
         else if (field.includes("section") && userData.section) {
             input.value = userData.section;
         }
@@ -67,31 +63,29 @@ function fillforms(){
             input.value = userData.branch;
         }
 
-
         // ADDRESS
         else if (field.includes("address") && userData.address) {
             input.value = userData.address;
         }
 
-        // Trigger event so that it works on website that does not directly permit to change values directly
+        // trigger input event (important for React / Angular sites)
         input.dispatchEvent(new Event("input", { bubbles: true }));
 
     });
 }
 
-//Get stored user data from extension storage
 
+// Get stored user data from extension storage
 chrome.storage.sync.get("userData", (data) => {
-    
-    if(!data.userData) return;
+
+    if (!data.userData) return;
 
     const userData = data.userData;
 
-    //fill form if data exists
+    // fill form if data exists
     fillforms(userData);
 
-
-    //setting observer to see changes in DOM
+    // observe DOM changes
     const observer = new MutationObserver(() => {
         fillforms(userData);
     });
@@ -101,7 +95,4 @@ chrome.storage.sync.get("userData", (data) => {
         subtree: true
     });
 
-})
-
-
-
+});

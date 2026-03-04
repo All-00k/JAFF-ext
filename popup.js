@@ -1,11 +1,15 @@
 const saveButton = document.getElementById("save");
 
-// function to collect form data
+// collect form data
 function getFormData() {
+
+    const firstName = document.getElementById("firstName").value;
+    const lastName = document.getElementById("lastName").value;
+
     return {
-        firstName: document.getElementById("firstName").value,
-        lastName: document.getElementById("lastName").value,
-        fullName: document.getElementById("fullName").value,
+        firstName: firstName,
+        lastName: lastName,
+        fullName: document.getElementById("fullName").value || firstName + " " + lastName,
 
         email: document.getElementById("email").value,
         phone: document.getElementById("phone").value,
@@ -37,8 +41,8 @@ saveButton.addEventListener("click", () => {
 });
 
 
-// input event listener for all inputs
-const inputs = document.querySelectorAll("input");
+// listen for input changes (auto-save)
+const inputs = document.querySelectorAll("input, textarea");
 
 inputs.forEach((input) => {
 
