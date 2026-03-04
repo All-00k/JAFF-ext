@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "JAF Filler",
+  "version": "1.0",
+  "description": "Automatically detects and fills forms",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
