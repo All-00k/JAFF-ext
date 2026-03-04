@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "JAF Filler",
+  "name": "JAFF",
   "version": "1.0",
   "description": "Automatically detects and fills forms",
   "content_scripts": [
