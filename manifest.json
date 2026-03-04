@@ -3,6 +3,10 @@
   "name": "JAFF",
   "version": "1.0",
   "description": "Automatically detects and fills forms",
+  "permission": ["storage"],
+  "action": {
+    "default_popup": "popup.html"
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
