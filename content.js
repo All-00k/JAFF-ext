@@ -15,11 +15,24 @@ inputs.forEach((input) => {
         (input.placeholder || "")
     ).toLowerCase();
 
+
+    //to handle labels 
+
+    let labelText = "";
+    if (input.labels && input.labels.length >0) {
+        lableText = input.labels[0].innerText.toLowerCase();
+    }
+
     
-    if (fieldInfo.includes("email")) {
+    const combinedInfo = fieldInfo + labelText;
+
+    
+    if (combinedInfo.includes("email")) {
         input.value = "ay879018@gmail.com";
+
         //webiste made from react angular does not allow direct value changes so we trigger an input event 
         //it triggers an input event taht user typed something
+        
         input.dispatchEvent(new Event("input", { bubbles: true}));
     }
 
